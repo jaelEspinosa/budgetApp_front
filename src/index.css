@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.background-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./img/backgroundLogin.png');
+    background-size: cover;
+    background-repeat: repeat;
+    position:absolute;
+
+    
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-form{
+    position: relative;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    margin: auto;
+}
+
+.logo{
+    max-width: 300px;
+}
+
+.color-turq{
+    color:#87c1bc;
+  
+}
+.borde-verde{
+    border:1px solid #8fc5c0;
+}
+.color-verde{
+    color:#8fc5c0;
+}
+
+.no-valido{
+    border: 1px solid orange;
+}
+
+.menu-background{
+   
+    background-image: url('./img/user-bg_ok.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.sidebar{
+    height: 100vh;
+}
+
+.rotate{
+    animation-name: rotation;
+    animation-duration: .5s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes rotation {
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(180deg)}
+}
+
+.minwidth{
+    min-width: 200px;
+}
