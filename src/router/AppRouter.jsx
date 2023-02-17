@@ -1,9 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Spinner } from '../../UI/spinner'
+
 import { LoginPage } from '../auth'
 import { EurekaPage } from '../eureka/pages/EurekaPage'
 import { useAuthStore } from '../hooks/useAuthStore'
+import { Spinner } from '../UI/spinner'
 
 export const AppRouter = () => {
 
