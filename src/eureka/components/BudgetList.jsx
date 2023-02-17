@@ -2,10 +2,13 @@ import React from 'react'
 import { useBudgetStore } from '../../hooks'
 
 export const BudgetList = () => {
-    const { budgets, startSetActiveBudget } = useBudgetStore()
+    const { budgets, startSetActiveBudget, startClearTotals } = useBudgetStore()
      
     const onSetActiveBudget = _id =>{
+      localStorage.removeItem('totalCostImport')
+      localStorage.removeItem('totalSaleImport')
         startSetActiveBudget(_id)
+        
     }
      
   return (

@@ -22,12 +22,11 @@ export const EurekaPage = () => {
     }, 1000);
   }
   const showBudgets = ()=>{
+  
    setOnBudgetsShow(!onBudgetsShow)
    startGettingBudgets()
   
   }
-
-  
 
   return (
 

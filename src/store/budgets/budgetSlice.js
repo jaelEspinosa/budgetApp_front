@@ -10,7 +10,9 @@ export const budgetSlice = createSlice({
        loading: true,
        budgets:[],
        activeBudget:{},
-       budgetAlert: undefined
+       budgetAlert: undefined,
+       totalCost:undefined,
+       totalSale:undefined
 
       },
   reducers: {
@@ -26,11 +28,27 @@ export const budgetSlice = createSlice({
     state.activeBudget = {}
   },
   clearState: (state) =>{
-    state.loading= true,
-    state.budgets=[],
-    state.activeBudget={},
-    state.budgetAlert= undefined
+    state.loading= true;
+    state.budgets=[];
+    state.activeBudget={};
+    state.budgetAlert= undefined;
+    state.totalCost= undefined;
+    state.totalSale= undefined;
    },
+
+  addTotalCost: (state, { payload }) =>{
+    state.totalCost= payload
+  },
+
+  addTotalSale: (state, { payload }) =>{
+    state.totalSale= payload
+  },
+
+  clearTotals: (state, { payload }) =>{
+    state.totalSale = undefined
+    state.totalCost = undefined
+  }  
+
 }
 })
 
@@ -39,4 +57,4 @@ export const budgetSlice = createSlice({
 
 
 
-export const { getBudgets, setAtiveBudget, clearState, clearAtiveBudget } = budgetSlice.actions
+export const { getBudgets, setAtiveBudget, clearState, clearAtiveBudget, addTotalCost, addTotalSale, clearTotals } = budgetSlice.actions

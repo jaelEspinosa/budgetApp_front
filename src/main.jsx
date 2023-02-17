@@ -8,11 +8,11 @@ import { AppRouter } from "./router/AppRouter";
 import { store } from "./store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+ 
     <BrowserRouter>
       <Provider store={ store }>
         <AppRouter/>
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>
+
 );
