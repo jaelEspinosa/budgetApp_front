@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../hooks';
-import logo from '/img/logotipo.png'
+import logo from '../../img/Logotipo.png'
 
 export const RegisterForm = () => {
     const [errorFormMessage, setErrorFormMessage] = useState({ok: true, type:'', message: ''})
