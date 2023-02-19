@@ -52,13 +52,13 @@ export const DashBoard = () => {
       </div>
         </>
       }
+       {
+        activeBudget.name && 
+        <>
       <div className="flex justify-between">
           <h2>Total Cost: {totalCost}€</h2>
           <h2>Total Sale: {totalSale}€</h2>
        </div>
-       {
-        activeBudget.name && 
-        <>
         <div className="float-button">
           <i className="fa-solid fa-trash"></i>
        </div>

@@ -75,9 +75,11 @@ export const LoginForm = () => {
                />
             </div>
 
-            <div className='color-turq flex items-end justify-end'>
-               <Link to={'/'} >Forgot password?</Link>
+            <div className='color-turq flex items-end justify-between mb-2'>
+               <Link to={'/register'} >Create Account?</Link>
+               <Link to={'/remember'} >Forgot password?</Link>               
             </div>
+        
 
             <div>
 
