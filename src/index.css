@@ -71,3 +71,91 @@
 .minwidth{
     min-width: 200px;
 }
+.budget{
+    
+    padding-right: 35px;
+    max-height: calc(100vh - 200px);
+    overflow-y: scroll;
+    
+}
+
+.budget::-webkit-scrollbar{
+    width: 5px;
+    
+ 
+}
+.budget::-webkit-scrollbar-thumb{
+    background:#67b6bd8a;
+    border-radius: 10px;
+}
+
+
+
+.float-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 10px;
+    left:10px;
+    background-color: rgb(191, 114, 114);
+    color:white;
+    padding: 20px;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+
+}
+.float-button:hover{
+    background-color: rgb(94, 40, 40);
+    cursor: pointer;
+
+    
+}
+
+
+
+.float-button-edit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 10px;
+    right:10px;
+    background-color: #5ca2a1;
+    color:white;
+    padding: 20px;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+
+}
+.float-button-edit:hover{
+    background-color: rgb(33, 78, 79);
+    cursor: pointer;
+
+}
+.float-button-add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 10px;
+    left:10px;
+    background-color: #5c7ea2;
+    color:white;
+    padding: 20px;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+    box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+
+}
+.float-button-add:hover{
+    background-color: #476482;
+    cursor: pointer;
+
+}

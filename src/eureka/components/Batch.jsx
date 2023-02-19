@@ -7,8 +7,7 @@ import { useBudgetStore } from "../../hooks"
 export const Batch = ({chapter}) => {
     const {startSetTotalCost, startSetTotalSale } = useBudgetStore()
  
-    let totalCostImport= Number(localStorage.getItem('totalCostImport'))
-    let totalSaleImport= Number(localStorage.getItem('totalSaleImport'))
+   
     let totalCostImportPart = 0
     let totalSaleImportPart = 0
 
@@ -16,17 +15,8 @@ export const Batch = ({chapter}) => {
     const totalCost = (batch.labourCost+batch.materialCost)*batch.amount
     const totalSale = ((((batch.labourCost/10)*chapter.coefficiensLabour)+(batch.materialCost/10)*chapter.coefficiensMaterial))*batch.amount
      totalCostImportPart= totalCostImportPart + totalCost
-     totalSaleImportPart= totalSaleImportPart + totalSale
-    
-     totalCostImport = totalCostImport + totalCost
-     totalSaleImport = totalSaleImport + totalSale
-     localStorage.setItem('totalCostImport',totalCostImport)
-     localStorage.setItem('totalSaleImport',totalSaleImport)
+     totalSaleImportPart= totalSaleImportPart + totalSale        
    }
-
-  
-
-
 
     return (
     <>

@@ -44,13 +44,30 @@ export const useBudgetStore = () => {
     }
   }
 
-  const startSetTotalCost = ()=>{
-      dispatch( addTotalCost(Number(localStorage.getItem('totalCostImport'))))
+  const startSetTotals = ()=>{
+    
+    let totalSale = 0;
+    let totalCost = 0;
+    const chapters = activeBudget.chapters || [];
+    
+    for (const chapter of chapters) {
+          
+      for (const batch of chapter.batchs) {
+        let totalBatchCost = (batch.labourCost+batch.materialCost)*batch.amount
+        let totalBatchSale = ((((batch.labourCost/10)*chapter.coefficiensLabour)+(batch.materialCost/10)*chapter.coefficiensMaterial))*batch.amount
+        totalSale = totalSale + totalBatchSale;
+        totalCost = totalCost + totalBatchCost
+
+      }
+        
+    }
+      
+
+      dispatch(addTotalCost(totalCost))
+      dispatch(addTotalSale(totalSale))
       
   }
-  const startSetTotalSale = ()=>{
-      dispatch( addTotalSale(Number(localStorage.getItem('totalSaleImport'))))
- }
+ 
 
  const startClearTotals = ()=>{
   dispatch(clearTotals())
@@ -69,9 +86,8 @@ export const useBudgetStore = () => {
         //methods
         startGettingBudgets,
         startSetActiveBudget,
-        startSetTotalCost,
-        startSetTotalSale,
-        startClearTotals
+        startClearTotals,
+        startSetTotals
 
   }
 }

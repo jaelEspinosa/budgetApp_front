@@ -2,11 +2,10 @@ import React from 'react'
 import { useBudgetStore } from '../../hooks'
 
 export const BudgetList = () => {
-    const { budgets, startSetActiveBudget, startClearTotals } = useBudgetStore()
+    const { budgets, startSetActiveBudget, activeBudget } = useBudgetStore()
      
     const onSetActiveBudget = _id =>{
-      localStorage.removeItem('totalCostImport')
-      localStorage.removeItem('totalSaleImport')
+     
         startSetActiveBudget(_id)
         
     }
@@ -19,12 +18,20 @@ export const BudgetList = () => {
     <ul className='overflow-auto'>
         {
             budgets.map(budget => (
-                <li className='hover: cursor-pointer py-1 px-5'
+                <li className={`hover: cursor-pointer py-1 px-5 ${activeBudget._id === budget._id ? 'bg-slate-700 underline':''}`}
                  onClick={()=>onSetActiveBudget(budget._id)} 
                  key={budget._id}>{budget.name}</li>
             )) 
         }
     </ul>
+
+    {!activeBudget.name && 
+      <div className='float-button-add'>
+       <i className="fa-sharp fa-solid fa-plus"></i>
+      </div>
+    }
+    
     </div>
+    
   )
 }

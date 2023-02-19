@@ -11,8 +11,8 @@ export const budgetSlice = createSlice({
        budgets:[],
        activeBudget:{},
        budgetAlert: undefined,
-       totalCost:undefined,
-       totalSale:undefined
+       totalCost:0,
+       totalSale:0,
 
       },
   reducers: {
@@ -32,8 +32,8 @@ export const budgetSlice = createSlice({
     state.budgets=[];
     state.activeBudget={};
     state.budgetAlert= undefined;
-    state.totalCost= undefined;
-    state.totalSale= undefined;
+    state.totalCost= 0;
+    state.totalSale= 0;
    },
 
   addTotalCost: (state, { payload }) =>{
@@ -45,8 +45,8 @@ export const budgetSlice = createSlice({
   },
 
   clearTotals: (state, { payload }) =>{
-    state.totalSale = undefined
-    state.totalCost = undefined
+    state.totalSale = 0
+    state.totalCost = 0
   }  
 
 }
