@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../hooks';
-//import logo from '../../img/logotipo.png'
+import logo from '/img/logotipo.png'
 
 export const RegisterForm = () => {
     const [errorFormMessage, setErrorFormMessage] = useState({ok: true, type:'', message: ''})
@@ -44,9 +44,9 @@ export const RegisterForm = () => {
     <div className='opacity-75 w-full sm:max-w-md  container mb-12 shadow-lg rounded-xl px-4 py-1 lg:py-8 lg:px-5 bg-white m-auto flex flex-col login-form'>
          <form onSubmit={onHandleSubmit} noValidate>  
          <h1></h1>      
-            {/* <div className='w-full flex justify-center mb-16 '>
+            <div className='w-full flex justify-center mb-16 '>
               <img className='logo' src={logo} alt='logoEureka'/>
-            </div> */}
+            </div>
             <div>
                <label 
                   className=" text-gray-600 block text-l "

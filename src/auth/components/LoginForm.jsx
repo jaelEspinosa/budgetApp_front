@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../../hooks/useAuthStore'
-import logo from '../../img/logotipo.png'
+import logo from '/img/logotipo.png'
 
 
 export const LoginForm = () => {
