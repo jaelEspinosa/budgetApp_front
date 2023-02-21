@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+
 import { useAuthStore } from '../../hooks';
 import logo from '../../img/Logotipo.png'
+import { Alert } from './Alert';
 
 export const RegisterForm = () => {
     const [errorFormMessage, setErrorFormMessage] = useState({ok: true, type:'', message: ''})
 
     const [formData, setFormData] = useState({name:'', email:'', password:''});
-    const {startLogin} = useAuthStore();
+    const {startLogin, startRegister} = useAuthStore();
 
     const onHandleChange = e =>{
       setErrorFormMessage({ok: true, type:'', message: ''})
@@ -37,13 +39,13 @@ export const RegisterForm = () => {
          return
       }
 
-      console.log('nuevo usuario', formData)
+      startRegister(formData)
    }
 
   return (
     <div className='opacity-75 w-full sm:max-w-md  container mb-12 shadow-lg rounded-xl px-4 py-1 lg:py-8 lg:px-5 bg-white m-auto flex flex-col login-form'>
          <form onSubmit={onHandleSubmit} noValidate>  
-         <h1></h1>      
+          
             <div className='w-full flex justify-center mb-16 '>
               <img className='logo' src={logo} alt='logoEureka'/>
             </div>
@@ -95,6 +97,7 @@ export const RegisterForm = () => {
                  onChange={onHandleChange}
                  
                />
+                <Alert />   
             </div>
 
             <div className='color-turq flex items-end justify-end'>
@@ -107,7 +110,7 @@ export const RegisterForm = () => {
 
             <input 
                 type='submit'
-                value='LOG IN'
+                value='CREATE NEW ACCOUNT'
                 className={`mt-5 py-2 rounded-xl text-white shadow p-2 px-3 text-l ${!errorFormMessage.ok ? 'bg-gray-200'
                 :' bg-orange-400  hover:bg-orange-600 hover:cursor-pointer transition-colors lg:w-auto'}`}
             />

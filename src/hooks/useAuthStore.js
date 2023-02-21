@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import eurekaApi from "../api/eurekaApi"
-import { checking, clearErrorMessage, onLogin, onLogout } from "../store"
+import { checking, clearErrorMessage, onLogin, onLogout, onRegister } from "../store"
 import { clearState } from "../store/budgets/budgetSlice"
 
 
@@ -25,11 +25,11 @@ export const useAuthStore = () => {
 
     } catch (error) {
         console.log (error)
-        dispatch( onLogout ('Usuario o contraseña incorrectos'))
+        dispatch( onLogout (error.response.data.msg))
 
         setTimeout(() => {
           dispatch( clearErrorMessage())  
-        }, 20);  
+        }, 2000);  
     }
   }
 
@@ -55,6 +55,26 @@ export const useAuthStore = () => {
       console.log(error)
     }
   }
+
+  const startRegister = async (valor) =>{
+
+     const {email, name, password} = valor
+     
+
+
+     try {
+      const { data } = await eurekaApi.post('/users', {nombre: name, email, password})
+      console.log(data)
+      dispatch(onRegister({msg:'revise su bandeja de entrada para verificar su cuenta'}) )
+      
+     } catch (error) {
+      console.log(error)
+      dispatch (onRegister( error.response.data.msg))
+      setTimeout(() => {
+      dispatch (clearErrorMessage()) 
+      }, 2000);
+     }
+  }
   
   
     return {
@@ -67,6 +87,7 @@ export const useAuthStore = () => {
       startLogin,
       startLogout,
       startValidateSesion,
+      startRegister,
     }
     
   

@@ -7,7 +7,8 @@ export const authSlice = createSlice({
   initialState : {
        status:"not-authenticated", // "authenticated", "not-authenticated", "checking"
        user:{},
-       errorMessage: undefined 
+       errorMessage: undefined,
+       message:undefined,
   },
   reducers: {
 
@@ -31,9 +32,12 @@ export const authSlice = createSlice({
 
   clearErrorMessage: ( state ) => {
         state.errorMessage = undefined;
+  },
+  onRegister: (state, {payload}) =>{
+        state.errorMessage = payload
   }
   
 
   }
 })
-export const { checking, onLogin, onLogout, clearErrorMessage } = authSlice.actions
+export const { checking, onLogin, onLogout, clearErrorMessage, onRegister } = authSlice.actions

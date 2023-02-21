@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../../hooks/useAuthStore'
 import logo from '../../img/Logotipo.png'
+import { Alert } from './Alert'
 
 
 export const LoginForm = () => {
@@ -83,6 +84,7 @@ export const LoginForm = () => {
 
             <div>
 
+            <Alert />
             <label 
                   className=" text-gray-600 text-l"
                >
