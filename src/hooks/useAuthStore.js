@@ -20,6 +20,7 @@ export const useAuthStore = () => {
         const { data } = await eurekaApi.post('users/login', { email, password } )
         const{ user, userEmail } = data
         localStorage.setItem('token-eureka', data.token)
+        
         dispatch( onLogin({user, userEmail}))
 
     } catch (error) {
@@ -37,6 +38,22 @@ export const useAuthStore = () => {
     dispatch( clearState() )
     localStorage.removeItem('token-eureka')
   }
+
+  const startValidateSesion = async () => {
+   
+    const token = localStorage.getItem('token-eureka')
+
+    try {
+      const { data } = await eurekaApi.get('/users/perfil', {
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      dispatch( onLogin({user: data.nombre, userEmail: data.email}))
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   
     return {
@@ -48,6 +65,7 @@ export const useAuthStore = () => {
       //methods
       startLogin,
       startLogout,
+      startValidateSesion,
     }
     
   

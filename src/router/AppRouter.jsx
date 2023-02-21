@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { LoginPage } from '../auth'
@@ -11,12 +11,20 @@ import { Spinner } from '../UI/spinner'
 export const AppRouter = () => {
 
    // const status = "not-authenticated"   // "checking" "authenticated" "not-authenticated"
-  const { status } = useAuthStore()
+  const { status, startValidateSesion } = useAuthStore()
   
+useEffect(() => {
+    const token = localStorage.getItem('token-eureka')
+ 
+    startValidateSesion()
+
+  }, [])
   
+
   if (status === 'checking') return (
     <Spinner />
   )
+
   
   return (
      

@@ -1,0 +1,33 @@
+.modalFormBudget {
+    margin:auto;
+    padding: 0;
+    left:0;
+    top:0px;
+    right: 0;
+    bottom: 0;
+    border:1px solid pink;
+    position:fixed;
+    width: 99vw;
+    height: 99vh;
+    z-index: 999;
+    background-color: white;
+    animation-name: modalShow;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes modalShow {
+    0%{
+        background-color: transparent;
+        width: 0vw;
+        height: 0vh;
+      
+    }
+    100%{
+        background-color: white;
+        width: 98vw;
+        height: 98vh;
+    
+
+    }
+}

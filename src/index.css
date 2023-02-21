@@ -105,6 +105,7 @@
     padding: 20px;
     border-radius: 50%;
     transition-duration: 0.5s;
+    transform: scale(60%);
 
 }
 .float-button:hover{
@@ -130,6 +131,7 @@
     padding: 20px;
     border-radius: 50%;
     transition-duration: 0.5s;
+    transform: scale(60%);
 
 }
 .float-button-edit:hover{
@@ -152,6 +154,7 @@
     border-radius: 50%;
     transition-duration: 0.5s;
     box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+    transform: scale(60%);
 
 }
 .float-button-add:hover{
@@ -159,3 +162,30 @@
     cursor: pointer;
 
 }
+
+
+.float-button-add-small{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+   
+    
+    background-color: #5c7ea2;
+    color:white;
+    padding: 20px;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+    box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+    transform: scale(50%);
+
+}
+.float-button-add-small:hover{
+    background-color: #476482;
+    cursor: pointer;
+
+}
+
+
+

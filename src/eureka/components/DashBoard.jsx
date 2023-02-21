@@ -1,11 +1,19 @@
 
 import { useEffect } from "react";
-import { useBudgetStore } from "../../hooks";
+import { useBudgetStore, useFormModalStore} from "../../hooks";
+
 import { Batch } from "./Batch";
+import { FormModalBudget } from "./FormModalBudget";
 
 export const DashBoard = () => {
     
     const {activeBudget, totalCost, totalSale, startSetTotals} = useBudgetStore()
+    const {isLoading, startOpenModal, startCloseModal } = useFormModalStore()
+    const { isOpen } = useFormModalStore()
+
+ const handleClickEdit = ()=>{
+    startOpenModal()
+ }   
 
   useEffect(() => {
 
@@ -19,6 +27,9 @@ export const DashBoard = () => {
     
   return (
     <div className="my-10 mx-10 text-2xl text-teal-500 budget">
+   {
+    isOpen && <FormModalBudget />
+   } 
       <h1>Budget</h1>
       {activeBudget.name &&
         <>
@@ -64,7 +75,7 @@ export const DashBoard = () => {
        </div>
        {
         activeBudget.name &&
-       <div className="float-button-edit">
+       <div onClick={handleClickEdit} className="float-button-edit">
          <i className="fa-solid fa-pen-to-square"></i>
        </div>
        }

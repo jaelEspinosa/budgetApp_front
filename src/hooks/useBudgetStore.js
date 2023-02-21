@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import eurekaApi from "../api/eurekaApi"
 import { onLogout } from "../store";
 import { addTotalCost, addTotalSale, clearTotals, getBudgets, setAtiveBudget } from "../store/budgets/budgetSlice";
+import { onCloseModal } from "../store/ui/formModalSlice";
 
 
 
@@ -10,7 +11,7 @@ export const useBudgetStore = () => {
   
   const dispatch = useDispatch();
   const {loading, budgets, budgetAlert, activeBudget, totalCost, totalSale} = useSelector(state => state.budget)
-  
+  const {} = useSelector(state => state.formModal)
 
   const startGettingBudgets = async () => {
     try {
@@ -72,6 +73,25 @@ export const useBudgetStore = () => {
  const startClearTotals = ()=>{
   dispatch(clearTotals())
  }
+
+ const startSaveBudget = async ( budget ) => {
+
+  const token = localStorage.getItem('token-eureka')
+   
+   try {
+      if(!budget._id){
+        const { data } = await eurekaApi.post('/budgets/new', budget,{
+          headers:{
+            'Authorization': 'Bearer ' + token
+          }
+        })
+      } 
+   } catch (error) {
+     console.log(error)
+   }
+   dispatch( onCloseModal() )
+   dispatch( getBudgets() )
+ }
   
     return {
 
@@ -87,7 +107,8 @@ export const useBudgetStore = () => {
         startGettingBudgets,
         startSetActiveBudget,
         startClearTotals,
-        startSetTotals
+        startSetTotals,
+        startSaveBudget
 
   }
 }
