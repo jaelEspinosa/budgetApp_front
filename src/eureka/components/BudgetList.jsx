@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useBudgetStore, useFormModalStore } from '../../hooks'
 
 export const BudgetList = () => {
@@ -12,6 +12,9 @@ export const BudgetList = () => {
   const handleClickNew = () =>{
        startOpenModal()
     }  
+
+  
+    
      
   return (
     <div className=' bg-slate-500'>

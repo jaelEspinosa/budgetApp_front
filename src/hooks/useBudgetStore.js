@@ -90,7 +90,7 @@ export const useBudgetStore = () => {
      console.log(error)
    }
    dispatch( onCloseModal() )
-   dispatch( getBudgets() )
+   startGettingBudgets()
  }
   
     return {
