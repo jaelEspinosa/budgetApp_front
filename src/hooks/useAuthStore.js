@@ -49,7 +49,8 @@ export const useAuthStore = () => {
           'Authorization': 'Bearer ' + token
         }
       });
-      dispatch( onLogin({user: data.nombre, userEmail: data.email}))
+     
+      dispatch( onLogin({user: data.perfil.nombre, userEmail: data.perfil.email}))
     } catch (error) {
       console.log(error)
     }
