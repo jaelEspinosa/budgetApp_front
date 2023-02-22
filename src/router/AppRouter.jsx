@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { LoginPage } from '../auth'
 import { ConfirmPage } from '../auth/pages/ConfirmPage'
 import { RegisterPage } from '../auth/pages/RegisterPage'
+import { RememberConfirmPage } from '../auth/pages/RememberConfirmPage'
 import { RememberPage } from '../auth/pages/RememberPage'
 import { EurekaPage } from '../eureka/pages/EurekaPage'
 import { useAuthStore } from '../hooks/useAuthStore'
@@ -37,7 +38,8 @@ useEffect(() => {
           <>
              <Route path='/*' element={<LoginPage />}/> 
              <Route path='/register' element={<RegisterPage />}/> 
-             <Route path='/remember/:id' element={<RememberPage />}/> 
+             <Route path='/remember/:id' element={<RememberConfirmPage />}/> 
+             <Route path='/remember' element={<RememberPage />}/> 
              <Route path='/confirm/:id' element={<ConfirmPage />}/> 
 
           </>

@@ -1,7 +1,11 @@
 import React from 'react'
+import { RememberForm } from '../components/RememberForm'
 
 export const RememberPage = () => {
   return (
-    <div>Remember</div>
+    <div className='background-login'>
+    <RememberForm/>
+
+    </div>
   )
 }
