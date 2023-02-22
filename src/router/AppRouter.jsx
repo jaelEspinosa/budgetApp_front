@@ -36,7 +36,7 @@ useEffect(() => {
         status === "not-authenticated" 
         ? (
           <>
-             <Route path='/*' element={<LoginPage />}/> 
+             <Route path='/login' element={<LoginPage />}/> 
              <Route path='/register' element={<RegisterPage />}/> 
              <Route path='/remember/:id' element={<RememberConfirmPage />}/> 
              <Route path='/remember' element={<RememberPage />}/> 

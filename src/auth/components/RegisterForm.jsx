@@ -101,7 +101,7 @@ export const RegisterForm = () => {
             </div>
 
             <div className='color-turq flex items-end justify-end'>
-               <Link to={'/'} >Login?</Link>
+               <Link to={'/login'} >Login?</Link>
             </div>
 
            

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import eurekaApi from '../../api/eurekaApi';
 
@@ -13,6 +13,7 @@ export const RememberConfirmForm = () => {
     const [formData, setFormData] = useState({ password:'', password2:''});
 
     const { id } = useParams();
+    const navigate = useNavigate()
 
     const onHandleChange = e =>{
       setErrorFormMessage({ok: true, type:'', message: ''})
@@ -42,7 +43,12 @@ export const RememberConfirmForm = () => {
       } catch (error) {
         console.log(error)
         setErrorFormMessage({ok:false, type:'password', message:error.response.data.msg})
+        return
       }
+
+     /*  setTimeout(() => {
+         navigate('/login')
+      }, 3000); */
    }
   return (
     <div className='opacity-75 w-full sm:max-w-md  container mb-12 shadow-lg rounded-xl px-4 py-1 lg:py-8 lg:px-5 bg-white m-auto flex flex-col login-form'>

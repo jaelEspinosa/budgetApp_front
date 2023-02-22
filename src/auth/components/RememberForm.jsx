@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import eurekaApi from '../../api/eurekaApi';
 
 import { useAuthStore } from '../../hooks';
@@ -11,6 +11,7 @@ export const RememberForm = () => {
 
     const [formData, setFormData] = useState({ email:''});
     const {startLogin, startRegister} = useAuthStore();
+    const navigate = useNavigate()
 
     const onHandleChange = e =>{
       setErrorFormMessage({ok: true, type:'', message: ''})
@@ -40,6 +41,9 @@ export const RememberForm = () => {
          console.log(error)
          setErrorFormMessage({ok:false, type:'email', message:error.response.data.msg})
       }
+      setTimeout(() => {
+         navigate('/login')
+      }, 3000);
    }
 
   return (
@@ -70,7 +74,7 @@ export const RememberForm = () => {
           
 
             <div className='color-turq flex items-end justify-end'>
-               <Link to={'/'} >Login?</Link>
+               <Link to={'/login'} >Login?</Link>
             </div>
 
             <div className={`text-center text-xl ${!errorFormMessage.ok ? 'text-orange-500':'text-teal-500'}`}>

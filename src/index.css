@@ -187,5 +187,33 @@
 
 }
 
+.button-trash-small{
+    margin:0;
+    padding: 0;
+    background-color: rgb(218, 117, 117);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    color:white;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+    box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+    transform: scale(45%);
+ }
+
+ .small{
+    transform: scale(35%);
+ }
+
+.red{
+ color:red; 
+ 
+}
+.green{
+ color:rgba(56, 127, 131, 0.862);
+}
+
 
 

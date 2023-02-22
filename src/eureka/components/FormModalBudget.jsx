@@ -73,17 +73,33 @@ export const FormModalBudget = () => {
             {formData.chapters?.map (chapter => (
 
               <li className='text-slate-500 mr-5 p-2' key={chapter._id}>
-              <span className='text-xl mr-28  font-bold mb-10'>{chapter.description}</span>
+              <div className='flex flex-row items-center justify-between'>
+               <div className='flex fles-row items-center justify-start'>
+                  <span className='text-xl font-bold'>{chapter.description}</span>
+                  <span className="button-trash-small hover:cursor-pointer">
+                      <i className="fa-solid fa-trash"></i>
+                   </span>
+               </div>
               <span className='text-lg mx-16 '>Coef. Labour: {chapter.coefficiensLabour/10}</span>
               <span className='text-lg mx-16'>Coef. Material: {chapter.coefficiensMaterial/10}</span>
+              </div>
               <hr/>
                 <ul className='mt-5'>
                   {chapter.batchs.map(batch => (
-                    <li className='text-xl text-slate-400 ml-5 grid grid-cols-4' key={batch._id}>
+                    <li className='text-xl text-slate-400 ml-5 grid grid-cols-5 gap-20' key={batch._id}>
                     <span className='text-lg mx-2'>{batch.description}</span>
                     <span className='text-lg mx-2'>Labour cost: {batch.labourCost} €</span>
                     <span className='text-lg mx-2'>Material cost: {batch.materialCost} €</span>
                     <span className='text-lg mx-2'>Amount: {batch.amount}</span>
+                   <div className='w-40 justify-self-end flex items-start justify-start gap-5'>
+                      <span className='red'>
+                      <i className="fa-regular fa-circle-xmark hover:cursor-pointer"></i>
+                      </span>
+                      <span className='green'>
+                      <i className="fa-solid fa-pen-to-square hover:cursor-pointer"></i>
+                      </span>
+
+                   </div>
                     </li>
                   ))}
                 </ul>              
