@@ -186,6 +186,28 @@
     cursor: pointer;
 
 }
+.float-button-add-small-xs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+   
+    
+    background-color: #5c7ea2;
+    color:white;
+    padding: 20px;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+    box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+    transform: scale(30%);
+
+}
+.float-button-add-small-xs:hover{
+    background-color: #476482;
+    cursor: pointer;
+
+}
 
 .button-trash-small{
     margin:0;
@@ -200,20 +222,75 @@
     border-radius: 50%;
     transition-duration: 0.5s;
     box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
-    transform: scale(45%);
+    transform: scale(35%);
  }
 
  .small{
     transform: scale(35%);
  }
 
+ .buttons:hover button{
+    color:rgba(128, 128, 128, 0.607); 
+    
+    
+}
+
 .red{
- color:red; 
+ color:rgba(255, 0, 0, 0); 
  
 }
+.red:hover{
+    color:rgba(255, 0, 0, 0.585)!important; 
+    
+   }
 .green{
- color:rgba(56, 127, 131, 0.862);
+ color:rgba(56, 127, 131, 0);
 }
+.green:hover{
+    color:rgba(56, 127, 131, 0.874)!important;
+   }
+
+
+.buttons-batch{
+    width: 16rem;
+    display: flex;
+    justify-self: end;
+    align-items: start;
+    justify-content: center;
+    gap: 2.5rem;
+    
+    transition:all;
+    transition:0.5s
+
+}
+
+.modal-chapter{
+    position: fixed;
+    width: 650px;
+    height: 250px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 999;
+    background-color: rgb(238, 232, 232);
+}
+.modal-batch{
+    position: fixed;
+    width: 750px;
+    height: 300px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 999;
+    background-color: rgb(238, 232, 232);
+}
+
+
+
 
 
 

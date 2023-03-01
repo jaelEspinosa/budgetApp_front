@@ -1,14 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { formatDate } from '../../helpers/formatDate';
 import { useBudgetStore, useFormModalStore } from '../../hooks';
 import '../../styles/FormModalBudget.css';
+import { Buttons } from './Buttons';
+import { ModalBatchs } from './ModalBatchs';
+import { ModalChapter } from './ModalChapter';
 
 export const FormModalBudget = () => {
 
-  const { activeBudget, startSaveBudget } = useBudgetStore()
+  const { activeBudget, startSaveBudget, startAddNewChapter, startAddNewBatch } = useBudgetStore()
   const { startCloseModal } = useFormModalStore()
 
-  const [formData, setFormData] = useState(activeBudget || {})
+  const [formData, setFormData] = useState(activeBudget || {});
+  
+  const [showModalChapter, setShowModalChapter] = useState(false)
+  const [showModalBatch, setShowModalBatch] = useState(false)
+  const [indexChapter, setIndexChapter] = useState()
+
+useEffect(() => {
+  setFormData(activeBudget)
+
+  
+}, [activeBudget.chapters])
+
+  
 
   const onInputChange = e =>{
         setFormData({
@@ -24,6 +39,17 @@ export const FormModalBudget = () => {
 
   const handleClickSave = () =>{
     startSaveBudget(formData)
+  }
+
+  const addNewChapter = () =>{
+    setShowModalChapter(true)
+   
+  }
+
+  const addNewBatch = (i) =>{
+    setShowModalBatch(true)
+    setIndexChapter(i)
+   
   }
 
   
@@ -60,19 +86,21 @@ export const FormModalBudget = () => {
       </label>
       <span>{formatDate(formData.date)}</span>
       </div>
-      <div className='border m-3 my-5 p-3'>
+      <div className='border m-3 my-5 p-3 budget-form'>
       <div className='flex justify-between items-center p'>
       <h1>Chapters</h1>
         <div>
-          <div className='float-button-add-small'>
+          <div className='float-button-add-small'
+               onClick={addNewChapter}
+                >
            <i className="fa-sharp fa-solid fa-plus"></i>
           </div>
         </div>
       </div>
           <ul>
-            {formData.chapters?.map (chapter => (
+            {formData.chapters?.map ((chapter, i) => (
 
-              <li className='text-slate-500 mr-5 p-2' key={chapter._id}>
+              <li className='text-slate-500 mr-5 p-2' key={chapter._id || i}>
               <div className='flex flex-row items-center justify-between'>
                <div className='flex fles-row items-center justify-start'>
                   <span className='text-xl font-bold'>{chapter.description}</span>
@@ -84,27 +112,31 @@ export const FormModalBudget = () => {
               <span className='text-lg mx-16'>Coef. Material: {chapter.coefficiensMaterial/10}</span>
               </div>
               <hr/>
-                <ul className='mt-5'>
-                  {chapter.batchs.map(batch => (
-                    <li className='text-xl text-slate-400 ml-5 grid grid-cols-5 gap-20' key={batch._id}>
+                <ul>
+                <li>
+                  <div 
+                      className='float-button-add-small-xs'
+                      onClick={() => addNewBatch(i)}
+                      >
+                  <i className="fa-sharp fa-solid fa-plus"></i>
+                  </div>
+                </li>
+                  {chapter.batchs?.map(batch => (
+                    <li className='text-xl text-slate-400 ml-5 grid grid-cols-5 gap-20 cursor-pointer mb-5 buttons' key={batch._id}>
                     <span className='text-lg mx-2'>{batch.description}</span>
                     <span className='text-lg mx-2'>Labour cost: {batch.labourCost} €</span>
                     <span className='text-lg mx-2'>Material cost: {batch.materialCost} €</span>
                     <span className='text-lg mx-2'>Amount: {batch.amount}</span>
-                   <div className='w-40 justify-self-end flex items-start justify-start gap-5'>
-                      <span className='red'>
-                      <i className="fa-regular fa-circle-xmark hover:cursor-pointer"></i>
-                      </span>
-                      <span className='green'>
-                      <i className="fa-solid fa-pen-to-square hover:cursor-pointer"></i>
-                      </span>
-
-                   </div>
+                    <Buttons />
+                    
                     </li>
                   ))}
+                  <hr/>
                 </ul>              
-              </li>    
+              </li>  
+                
              ))}
+             
           </ul>
 
      </div>
@@ -117,7 +149,13 @@ export const FormModalBudget = () => {
     <button onClick={handleClickSave} className="float-button-edit">
           <i className="fa-sharp fa-solid fa-floppy-disk"></i>
        </button>
-    
+      {showModalChapter && <ModalChapter  showModalChapter = {showModalChapter} 
+                                          setShowModalChapter = {setShowModalChapter}
+         />} 
+     {showModalBatch && <ModalBatchs showModalBatch={showModalBatch} 
+                                     setShowModalBatch={setShowModalBatch}
+                                     indexChapter={indexChapter}
+                                      />}
     </div>
   
     )

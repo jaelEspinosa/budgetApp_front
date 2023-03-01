@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { LoginPage } from '../auth'
 import { ConfirmPage } from '../auth/pages/ConfirmPage'
@@ -41,11 +41,19 @@ useEffect(() => {
              <Route path='/remember/:id' element={<RememberConfirmPage />}/> 
              <Route path='/remember' element={<RememberPage />}/> 
              <Route path='/confirm/:id' element={<ConfirmPage />}/> 
+             <Route path="/*" element= {<Navigate to='/login'/>}/>
 
           </>
           )
 
-        : <Route path='/*' element={<EurekaPage />} />
+        : 
+        (
+          <>
+            <Route path='/eureka' element={<EurekaPage />} />
+            <Route path="/*" element= {<Navigate to='/eureka'/>}/>
+
+          </>
+        )
        }
     </Routes>
   )

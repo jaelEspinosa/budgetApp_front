@@ -46,8 +46,8 @@ export const DashBoard = () => {
           <hr/>
           <ul>
             {
-                activeBudget.chapters.map(chapter => (
-                    <div key={chapter._id} className="border my-5 p-3">
+                activeBudget.chapters?.map((chapter, i) => (
+                    <div key={i} className="border my-5 p-3">
                    <li className="text-slate-700 text-lg flex justify-between" >
                      <span className="minwidth">{chapter.description}</span> 
                      <span>Cf. Material: {chapter.coefficiensMaterial/10}</span> 

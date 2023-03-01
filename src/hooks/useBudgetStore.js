@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import eurekaApi from "../api/eurekaApi"
 import { onLogout } from "../store";
-import { addTotalCost, addTotalSale, clearTotals, getBudgets, setAtiveBudget } from "../store/budgets/budgetSlice";
+import { addChapter, addTotalCost, addTotalSale, clearTotals, getBudgets, setAtiveBudget } from "../store/budgets/budgetSlice";
 import { onCloseModal } from "../store/ui/formModalSlice";
 
 
@@ -52,14 +52,16 @@ export const useBudgetStore = () => {
     const chapters = activeBudget.chapters || [];
     
     for (const chapter of chapters) {
-          
-      for (const batch of chapter.batchs) {
-        let totalBatchCost = (batch.labourCost+batch.materialCost)*batch.amount
-        let totalBatchSale = ((((batch.labourCost/10)*chapter.coefficiensLabour)+(batch.materialCost/10)*chapter.coefficiensMaterial))*batch.amount
-        totalSale = totalSale + totalBatchSale;
-        totalCost = totalCost + totalBatchCost
+     if(chapter.batchs){
 
-      }
+       for (const batch of chapter.batchs) {
+         let totalBatchCost = (batch.labourCost+batch.materialCost)*batch.amount
+         let totalBatchSale = ((((batch.labourCost/10)*chapter.coefficiensLabour)+(batch.materialCost/10)*chapter.coefficiensMaterial))*batch.amount
+         totalSale = totalSale + totalBatchSale;
+         totalCost = totalCost + totalBatchCost
+ 
+       }
+     }     
         
     }
       
@@ -92,6 +94,36 @@ export const useBudgetStore = () => {
    dispatch( onCloseModal() )
    startGettingBudgets()
  }
+
+ const startAddNewChapter = (chapter) =>{
+  
+  if(activeBudget.chapters){
+    const newChapterArray = [...activeBudget.chapters, chapter]
+    dispatch(addChapter(newChapterArray))
+    return
+  }
+   dispatch(addChapter([chapter]))
+ }
+
+
+ const startAddNewBatch = (batch, indexChapter)=>{
+  
+  if(activeBudget.chapters[indexChapter].batchs) {
+
+    const newBatchArray = [...activeBudget.chapters[indexChapter].batchs, batch ]
+  
+  
+    console.log('el nuevo array es, ', newBatchArray);
+    //todo hacer dispatch para añadir elnuevo batch
+    return
+  }
+
+    console.log('el nuevo array es', [batch])
+    //todo hacer dispatch para añadir elnuevo batch
+
+ }
+
+ 
   
     return {
 
@@ -108,7 +140,9 @@ export const useBudgetStore = () => {
         startSetActiveBudget,
         startClearTotals,
         startSetTotals,
-        startSaveBudget
+        startSaveBudget,
+        startAddNewChapter,
+        startAddNewBatch,
 
   }
 }

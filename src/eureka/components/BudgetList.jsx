@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+
 import { useBudgetStore, useFormModalStore } from '../../hooks'
 
 export const BudgetList = () => {
@@ -11,11 +11,9 @@ export const BudgetList = () => {
 
   const handleClickNew = () =>{
        startOpenModal()
+       //todo colocar un cascaron de activeBudget vacio
     }  
 
-  
-    
-     
   return (
     <div className=' bg-slate-500'>
     <div className='py-5 px-4 text-xl font-semibold '>
