@@ -12,7 +12,7 @@ export const Batch = ({chapter = []}) => {
     let totalSaleImportPart = 0
 
  if (chapter.batchs){
-  console.log(chapter.batchs)
+  
    for (const batch of chapter.batchs) {
     const totalCost = (batch.labourCost+batch.materialCost)*batch.amount
     const totalSale = ((((batch.labourCost/10)*chapter.coefficiensLabour)+(batch.materialCost/10)*chapter.coefficiensMaterial))*batch.amount

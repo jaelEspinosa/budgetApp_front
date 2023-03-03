@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useAuthStore, useBudgetStore } from '../../hooks'
-import { clearAtiveBudget } from '../../store/budgets/budgetSlice'
+import { clearActiveBudget } from '../../store/budgets/budgetSlice'
 
 import { BudgetList } from '../components/BudgetList'
 import { DashBoard } from '../components/DashBoard'
@@ -39,7 +39,7 @@ export const EurekaPage = () => {
             onClick={ handleLogout }
             className='color-verde px-10 hover:cursor-pointer uppercase text-xs'>logout</span>
          </div>
-        <div onClick={() =>{onRotate(); showBudgets(); dispatch(clearAtiveBudget())}  } className={`pt-4 pb-5 flex items-center justify-between px-5 hover:bg-slate-800 transition-colors hover:cursor-pointer ${onBudgetsShow ? 'bg-slate-800':''}`}>
+        <div onClick={() =>{onRotate(); showBudgets(); dispatch(clearActiveBudget())}  } className={`pt-4 pb-5 flex items-center justify-between px-5 hover:bg-slate-800 transition-colors hover:cursor-pointer ${onBudgetsShow ? 'bg-slate-800':''}`}>
             <p className='font-bold'>Budgets</p>
             <div className={`w-3 h-3 borde-verde ${rotate ? 'rotate':null}`}></div>
         </div>

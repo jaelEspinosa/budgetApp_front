@@ -21,10 +21,10 @@ export const budgetSlice = createSlice({
      state.budgets = payload;
     },
 
-  setAtiveBudget: ( state, { payload } ) => {
+  setActiveBudget: ( state, { payload } ) => {
     state.activeBudget = payload;
   },
-  clearAtiveBudget: ( state, { payload } )=>{
+  clearActiveBudget: ( state, { payload } )=>{
     state.activeBudget = {}
   },
   clearState: (state) =>{
@@ -61,7 +61,7 @@ export const budgetSlice = createSlice({
 
 
 
-export const { getBudgets, setAtiveBudget, 
-               clearState, clearAtiveBudget, 
+export const { getBudgets, setActiveBudget, 
+               clearState, clearActiveBudget, 
                addTotalCost, addTotalSale, 
                clearTotals, addChapter, } = budgetSlice.actions

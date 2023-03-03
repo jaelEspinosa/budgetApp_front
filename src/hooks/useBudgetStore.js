@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import eurekaApi from "../api/eurekaApi"
 import { onLogout } from "../store";
-import { addChapter, addTotalCost, addTotalSale, clearTotals, getBudgets, setAtiveBudget } from "../store/budgets/budgetSlice";
+import { addChapter, addTotalCost, addTotalSale, clearState, clearTotals, getBudgets, setActiveBudget } from "../store/budgets/budgetSlice";
 import { onCloseModal } from "../store/ui/formModalSlice";
 
 
@@ -12,6 +12,8 @@ export const useBudgetStore = () => {
   const dispatch = useDispatch();
   const {loading, budgets, budgetAlert, activeBudget, totalCost, totalSale} = useSelector(state => state.budget)
   const {} = useSelector(state => state.formModal)
+  
+  ////
 
   const startGettingBudgets = async () => {
     try {
@@ -28,8 +30,12 @@ export const useBudgetStore = () => {
       dispatch( onLogout('sesión caducada'))
     }
   }
-  
-  
+  const startSetActiveLocalBudget = (data)=>{
+    dispatch( setActiveBudget( data ))
+  }
+   
+  ////
+
   const startSetActiveBudget = async _id =>{
     try {
       const token = localStorage.getItem('token-eureka')
@@ -38,12 +44,14 @@ export const useBudgetStore = () => {
           'Authorization': 'Bearer ' + token
         }
       })
-      dispatch( setAtiveBudget( data ) )
+      dispatch( setActiveBudget( data ) )
 
     } catch (error) {
       console.log(error)
     }
   }
+
+////
 
   const startSetTotals = ()=>{
     
@@ -64,30 +72,42 @@ export const useBudgetStore = () => {
      }     
         
     }
-      
-
       dispatch(addTotalCost(totalCost))
       dispatch(addTotalSale(totalSale))
-      
+    
   }
  
+////
 
  const startClearTotals = ()=>{
   dispatch(clearTotals())
  }
 
- const startSaveBudget = async ( budget ) => {
+////
+
+const startSaveBudget = async ( budget ) => {
 
   const token = localStorage.getItem('token-eureka')
    
    try {
+      
       if(!budget._id){
         const { data } = await eurekaApi.post('/budgets/new', budget,{
           headers:{
             'Authorization': 'Bearer ' + token
           }
         })
-      } 
+      }else{
+        const { data } = await eurekaApi.put(`/budgets/${budget._id}`, budget,{
+          headers:{
+            'Authorization': 'Bearer ' + token
+          }
+
+        }) 
+        startSetActiveBudget(budget._id)
+     
+      }
+     
    } catch (error) {
      console.log(error)
    }
@@ -95,35 +115,132 @@ export const useBudgetStore = () => {
    startGettingBudgets()
  }
 
- const startAddNewChapter = (chapter) =>{
-  
-  if(activeBudget.chapters){
-    const newChapterArray = [...activeBudget.chapters, chapter]
-    dispatch(addChapter(newChapterArray))
-    return
-  }
-   dispatch(addChapter([chapter]))
- }
+ ////
 
-
- const startAddNewBatch = (batch, indexChapter)=>{
-  
-  if(activeBudget.chapters[indexChapter].batchs) {
-
-    const newBatchArray = [...activeBudget.chapters[indexChapter].batchs, batch ]
-  
-  
-    console.log('el nuevo array es, ', newBatchArray);
-    //todo hacer dispatch para añadir elnuevo batch
-    return
-  }
-
-    console.log('el nuevo array es', [batch])
-    //todo hacer dispatch para añadir elnuevo batch
-
- }
-
+ const startAddNewChapter =  async chapter =>{
+  const token = localStorage.getItem('token-eureka')
  
+  try {
+    if (chapter._id){    
+       await eurekaApi.put(`/chapters/${chapter._id}`, chapter, {
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      })
+      startSetActiveBudget(activeBudget._id) 
+      return
+     }
+   
+    const { data } = await eurekaApi.post('/chapters/new', chapter, {
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      })  
+      const newChapterArray = [...activeBudget.chapters, data.chapter._id]
+      
+      const budgetData = await eurekaApi.put(`/budgets/${activeBudget._id}`, {chapters:newChapterArray},{
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      })
+      startSetActiveBudget(budgetData.data.budget._id)    
+    
+  } catch (error) {
+    console.log(error)
+  }
+
+ }
+
+////
+
+ const startAddNewBatch = async (batch, chapter)=>{
+  const token = localStorage.getItem('token-eureka')
+  
+  try {
+     const { data } = await eurekaApi.post('/batchs/new', batch, {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+     })
+
+     
+    const newBacthsArray = [...chapter.batchs, data.batch._id]
+
+    const res = await eurekaApi.put(`/chapters/${chapter._id}`,{batchs: newBacthsArray}, {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    
+    
+    startSetActiveBudget(activeBudget._id)
+    
+  } catch (error) {
+    console.log(error)
+  }
+ }
+ ////
+
+ const startDeleteBudget = async () =>{
+  const token = localStorage.getItem('token-eureka')
+
+  try {
+    for (const chapter of activeBudget.chapters) {      
+      
+      for (const batch of chapter.batchs) {        
+        await eurekaApi.delete(`/batchs/${batch._id}`,{
+          headers:{
+            'Authorization': 'Bearer ' + token
+          }
+        })        
+      }
+      
+      await eurekaApi.delete(`/chapters/${chapter._id}`,{
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      })
+    }
+    
+    const { data } = await eurekaApi.delete(`/budgets/${activeBudget._id}`, {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    console.log(data)
+    dispatch(clearState())
+  } catch (error) {
+    console.log(error)
+  }
+ }
+
+////
+
+ const startDeleteChapter = async ( chapter ) => {
+  const token = localStorage.getItem('token-eureka')
+
+  
+  try {
+    const { data } = await eurekaApi.delete(`/chapters/${chapter._id}`, {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    
+    const newChapterArray= activeBudget.chapters.filter(chapterDb => chapterDb._id !== chapter._id)
+
+    await eurekaApi.put(`/budgets/${activeBudget._id}`, {chapters:newChapterArray}, {
+      headers:{
+        'Authorization': 'Bearer ' + token
+      }
+    })
+
+    startSetActiveBudget(activeBudget._id)
+  
+  } catch (error) {
+    console.log(error)
+  }
+ }
   
     return {
 
@@ -138,11 +255,14 @@ export const useBudgetStore = () => {
         //methods
         startGettingBudgets,
         startSetActiveBudget,
+        startSetActiveLocalBudget,
         startClearTotals,
         startSetTotals,
         startSaveBudget,
         startAddNewChapter,
         startAddNewBatch,
+        startDeleteBudget,
+        startDeleteChapter,
 
   }
 }

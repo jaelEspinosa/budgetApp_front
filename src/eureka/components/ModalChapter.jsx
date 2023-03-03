@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { useBudgetStore } from '../../hooks'
 
-export const ModalChapter = ({showModalChapter, setShowModalChapter}) => {
+export const ModalChapter = ({showModalChapter, setShowModalChapter, chapter}) => {
     
     const {startAddNewChapter}= useBudgetStore()
     
-    const [formState, setFormState] = useState({
-     description:'',
-     coefficiensLabour:0,
-     coefficiensMaterial:0
+    const [formState, setFormState] = useState(chapter ||{
+     
+     description: '',
+     coefficiensLabour:'',
+     coefficiensMaterial:'',
+    
     })
-
+ 
     const handleSubmit = e => {
         
         e.preventDefault()
@@ -43,7 +45,7 @@ export const ModalChapter = ({showModalChapter, setShowModalChapter}) => {
                     <input className='mx-2 px-2' 
                            type="text" 
                            name='description' 
-                           value={formState.name} 
+                           value={formState.description} 
                            onChange={handleChange}/>
         </label>
         <div>

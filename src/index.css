@@ -224,7 +224,27 @@
     box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
     transform: scale(35%);
  }
-
+ .button-trash-small:hover{
+    background-color:rgb(159, 71, 71) ;
+ }
+ .button-edit-small{
+    margin:0;
+    padding: 0;
+    background-color: #5c7ea2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    color:white;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+    box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+    transform: scale(35%);
+ }
+.button-edit-small:hover{
+    background-color: #3c546d;
+}
  .small{
     transform: scale(35%);
  }
@@ -290,7 +310,23 @@
 }
 
 
+.modal-delete{
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin:auto;
+    z-index: 999;
+    animation: showmodal 0.3s ;
+    animation-timing-function: ease-in-out;
 
+}
+
+@keyframes showmodal {
+    0%{opacity: 0;}
+    100%{opacity:1;}
+}
 
 
 

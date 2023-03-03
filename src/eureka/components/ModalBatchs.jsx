@@ -2,15 +2,15 @@ import { useState } from "react"
 import { useBudgetStore } from "../../hooks"
 
 
-export const ModalBatchs = ({setShowModalBatch, showModalBatch, indexChapter}) => {
+export const ModalBatchs = ({setShowModalBatch, showModalBatch, chapter}) => {
     const {startAddNewBatch}= useBudgetStore()
     
 
     const [formState, setFormState] = useState({
         description:'',
-        amount:0,
-        materialCost:0,
-        labourCost:0,
+        amount:'',
+        materialCost:'',
+        labourCost:'',
         rank:0
        })
 
@@ -35,7 +35,7 @@ export const ModalBatchs = ({setShowModalBatch, showModalBatch, indexChapter}) =
         if(formState.description.length === 0 || formState.coefficiensLabour === 0 || formState.coefficiensMaterial === 0){
           return
         }
-        startAddNewBatch(formState, indexChapter)
+        startAddNewBatch(formState, chapter)
         setShowModalBatch(false)
     } 
     

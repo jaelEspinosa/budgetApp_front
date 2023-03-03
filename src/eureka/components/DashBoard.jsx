@@ -1,8 +1,9 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBudgetStore, useFormModalStore} from "../../hooks";
 
 import { Batch } from "./Batch";
+import { DeleteBudgetModal } from "./DeleteBudgetModal";
 import { FormModalBudget } from "./FormModalBudget";
 
 export const DashBoard = () => {
@@ -10,7 +11,7 @@ export const DashBoard = () => {
     const {activeBudget, totalCost, totalSale, startSetTotals} = useBudgetStore()
     const {isLoading, startOpenModal, startCloseModal } = useFormModalStore()
     const { isOpen } = useFormModalStore()
-
+    const [showModalDelete, setShowModalDelete] = useState(false)
  const handleClickEdit = ()=>{
     startOpenModal()
  }   
@@ -70,7 +71,7 @@ export const DashBoard = () => {
           <h2>Total Cost: {totalCost}€</h2>
           <h2>Total Sale: {totalSale}€</h2>
        </div>
-        <div className="float-button">
+        <div className="float-button" onClick={()=>setShowModalDelete(true)}>
           <i className="fa-solid fa-trash"></i>
        </div>
        {
@@ -81,6 +82,7 @@ export const DashBoard = () => {
        }
         </>
        }
+       {showModalDelete && <DeleteBudgetModal setShowModalDelete = {setShowModalDelete} showModalDelete={showModalDelete} />}
     </div>
   );
 };
