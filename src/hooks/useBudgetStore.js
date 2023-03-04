@@ -219,8 +219,19 @@ const startSaveBudget = async ( budget ) => {
  const startDeleteChapter = async ( chapter ) => {
   const token = localStorage.getItem('token-eureka')
 
-  
+ 
+
   try {
+
+    for (const batch of chapter.batchs) {
+      
+      await eurekaApi.delete(`/batchs/${batch._id}`, {
+        headers:{
+          'Authorization': 'Bearer ' + token
+        }
+      })
+    }
+    
     const { data } = await eurekaApi.delete(`/chapters/${chapter._id}`, {
       headers:{
         'Authorization': 'Bearer ' + token
