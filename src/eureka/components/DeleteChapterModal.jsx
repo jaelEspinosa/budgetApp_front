@@ -11,7 +11,7 @@ export const DeleteChapterModal = ({ setShowDeleteChapterModal, chapter }) => {
     
   return (
     <div className='border-teal-500 border  h-40 w-96 shadow-xl rounded-xl flex flex-col justify-around modal-delete bg-slate-50'>
-      <h2 className='text-center mt-2'>Delete Chapter permanently?</h2>
+      <h2 className='text-center mt-2'>Delete Chapter, "{chapter.description}" permanently?</h2>
       <div className='flex justify-around items-center'>
         <button 
             onClick={onDelete}

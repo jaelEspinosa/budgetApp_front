@@ -11,7 +11,7 @@ export const BudgetList = () => {
 
   const handleClickNew = () =>{
        startOpenModal()
-       //todo colocar un cascaron de activeBudget vacio
+      
     }  
 
   return (

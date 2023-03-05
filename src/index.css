@@ -106,6 +106,7 @@
     border-radius: 50%;
     transition-duration: 0.5s;
     transform: scale(60%);
+    box-shadow: 6px 6px 10px rgb(41, 39, 39);
 
 }
 .float-button:hover{

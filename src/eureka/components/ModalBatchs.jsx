@@ -2,11 +2,11 @@ import { useState } from "react"
 import { useBudgetStore } from "../../hooks"
 
 
-export const ModalBatchs = ({setShowModalBatch, showModalBatch, chapter}) => {
+export const ModalBatchs = ({setShowModalBatch, showModalBatch, chapter, batch}) => {
     const {startAddNewBatch}= useBudgetStore()
     
 
-    const [formState, setFormState] = useState({
+    const [formState, setFormState] = useState(batch ||{
         description:'',
         amount:'',
         materialCost:'',
@@ -29,27 +29,29 @@ export const ModalBatchs = ({setShowModalBatch, showModalBatch, chapter}) => {
         }
     } 
 
-    const handleSubmit = e => {
-        
-        e.preventDefault()
+    const handleSubmit = (e) => {
+       e.preventDefault()
+       
         if(formState.description.length === 0 || formState.coefficiensLabour === 0 || formState.coefficiensMaterial === 0){
           return
         }
+        
         startAddNewBatch(formState, chapter)
         setShowModalBatch(false)
     } 
     
     
   return (
-    <div className='border text-3xl modal-batch p-5 rounded-lg shadow-lg'>
-    <h2 className="mb-5">New Batch</h2>
+    
+    <div className='border text-3xl modal-batch p-5 rounded-lg shadow-lg text-teal-500 '>
+    <h2 className="mb-5">{`${batch?._id ? 'Edit ':'New '}Batch`}</h2>
     <form className='mt-2 flex flex-col gap-2' onSubmit={handleSubmit} >
     <label className='text-xl'>Description
     
                 <input className='mx-2 px-2' 
                        type="text" 
                        name='description' 
-                       value={formState.name} 
+                       value={formState.description} 
                        onChange={handleChange}/>
     </label>
     <hr/>
@@ -82,10 +84,11 @@ export const ModalBatchs = ({setShowModalBatch, showModalBatch, chapter}) => {
     <div className='flex items-center justify-around mt-5'>
     <button onClick={()=>setShowModalBatch(false)}>cancel</button>
 
-    <button type='submit'>accept</button>
+    <button onClick={handleSubmit}>accept</button>
 
     </div>
     </form>
 </div>
+
   )
 }

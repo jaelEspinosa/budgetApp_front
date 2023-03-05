@@ -43,18 +43,17 @@ useEffect(() => {
   }
 
   const handleClickSave = () =>{
-    if (formData.clientName === '') {
+    if (!formData.clientName) {
       setFormError({ok:false, type:'clientName', msg:'Required'})
-      
       return
     }
 
-    if (formData.name === '') {
+    if (!formData.name) {
       setFormError({ok:false, type:'name', msg:'Required'})
-      
       return
     }
     startSaveBudget(formData)
+  
   }
 
   const addNewChapter = (chapter) =>{
@@ -78,8 +77,8 @@ useEffect(() => {
     <div className='modalFormBudget'>
  
     <h1 className='p-10 m-2 text-4xl'>
-       {`${activeBudget._id ? 'Edit Budget:  ':'New Budget'}`}
-        {activeBudget?.name}
+       {`${activeBudget._id ? 'Edit Budget:  ':'New Budget: '}`}
+       <span className='font-bold'>{activeBudget?.name}</span>  
     </h1>
 
     
@@ -153,7 +152,7 @@ useEffect(() => {
                     <span className='text-lg mx-2'>Labour cost: {batch.labourCost} €</span>
                     <span className='text-lg mx-2'>Material cost: {batch.materialCost} €</span>
                     <span className='text-lg mx-2'>Amount: {batch.amount}</span>
-                    <Buttons />
+                    <Buttons batch={batch}/>
                     
                     </li>
                   ))}
