@@ -35,9 +35,14 @@ export const DashBoard = () => {
       {activeBudget.name &&
         <>
 
-        <div className="mt-10 border p-2">
-        <h2 className="text-xl text-slate-700">{activeBudget.name}</h2>
-        <h3 className="text-xl text-slate-700">{activeBudget.clientName}</h3>
+        <div className="mt-10 border p-2 flex items-center justify-between">
+        <div>
+            <h2 className="text-xl text-slate-700">{activeBudget.name}</h2>
+            <h3 className="text-xl text-slate-700">{activeBudget.clientName}</h3>
+        </div>
+        <div className="w-16  h-16 border rounded-xl hover:w-60 hover:h-60  transition-all foto border-teal-600 shadow-xl ">
+          <img src={activeBudget.img}/>
+        </div>
         </div>
       <div>
       <div>

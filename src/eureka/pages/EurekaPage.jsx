@@ -31,13 +31,15 @@ export const EurekaPage = () => {
   return (
 
     <div className='flex sidebar'>
-    <div className=' bg-slate-600 text-white'>
+    <div className=' bg-slate-600 text-white w-96'>
          <div className='menu-background pb-10'>
-            <h2 className='text-xl uppercase  pt-5 grow-0 px-10 mb-1 mr-36 text-white text-background'>{user.user}</h2>
-            <span className='color-verde px-10 hover:cursor-pointer uppercase text-xs'>refresh</span>
-            <span 
-            onClick={ handleLogout }
-            className='color-verde px-10 hover:cursor-pointer uppercase text-xs'>logout</span>
+            <h2 className='text-xl uppercase  pt-5 grow-0 px-10 mb-6 mr-36 text-white text-background'>{user.user}</h2>
+            <div className='w-full flex justify-evenly gap-14 '>
+                <span className='color-verde px-10 hover:cursor-pointer uppercase text-xs'>refresh</span>
+                <span 
+                onClick={ handleLogout }
+                className='color-verde px-10 hover:cursor-pointer uppercase text-xs'>logout</span>
+            </div>
          </div>
         <div onClick={() =>{onRotate(); showBudgets(); dispatch(clearActiveBudget())}  } className={`pt-4 pb-5 flex items-center justify-between px-5 hover:bg-slate-800 transition-colors hover:cursor-pointer ${onBudgetsShow ? 'bg-slate-800':''}`}>
             <p className='font-bold'>Budgets</p>

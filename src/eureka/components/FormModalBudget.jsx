@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { formatDate } from '../../helpers/formatDate';
+import { fileUpload } from '../../helpers/uploadFileCloud';
 import { useBudgetStore, useFormModalStore } from '../../hooks';
 import '../../styles/FormModalBudget.css';
 import { Buttons } from './Buttons';
@@ -8,7 +9,7 @@ import { ModalBatchs } from './ModalBatchs';
 import { ModalChapter } from './ModalChapter';
 
 export const FormModalBudget = () => {
-
+  const fileInputRef = useRef()
   const { activeBudget, startSaveBudget, startSetActiveLocalBudget } = useBudgetStore()
   const { startCloseModal } = useFormModalStore()
 
@@ -16,9 +17,11 @@ export const FormModalBudget = () => {
   
   const [showModalChapter, setShowModalChapter] = useState(false)
   const [showModalBatch, setShowModalBatch] = useState(false)
+  
   const [chapterId, setChapterId] = useState()
   const [formError, setFormError] = useState({ok:true, type:'', msg:''})
   const [showDeleteChapterModal, setShowDeleteChapterModal] = useState(false)
+
 
 useEffect(() => {
   setFormData(activeBudget)
@@ -26,7 +29,14 @@ useEffect(() => {
   
 }, [activeBudget.chapters])
 
-  
+ const onFileInputChange = async ({target}) =>{
+  console.log('los files son...', target.files[0])
+ const fileImage = await fileUpload( target.files[0])
+ setFormData({
+  ...formData,
+   img:fileImage
+ })
+ }  
 
   const onInputChange = e =>{
     setFormError({ok:true, type:'', msg:''} )
@@ -105,7 +115,25 @@ useEffect(() => {
           />
           {formError.type === 'name' && <span className='text-orange-400'>{formError.msg}</span>}
       </label>
+      
+      <input
+           onChange={ onFileInputChange }
+           ref={fileInputRef}
+           style={{display:'none'}}
+           type='file'/>
+
       <span>{formatDate(formData.date)}</span>
+      
+      </div>
+      <div className='flex items-center justify-start ml-3 gap-11'>
+          <div 
+           onClick={ ()=> fileInputRef.current.click()}
+           className='w-10 h-10 border bg-teal-500 text-white flex items-center justify-center rounded-3xl hover:cursor-pointer'>
+          <i className="fa-regular fa-image"></i>
+          </div>
+        <div className='w-10 h-10 border'>
+         {formData.img && <img  className='h-full w-full' src={formData.img} alt='image'/>}
+        </div>
       </div>
      {activeBudget._id && 
       <div className='border m-3 my-5 p-3 budget-form'>

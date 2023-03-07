@@ -105,6 +105,7 @@ const startSaveBudget = async ( budget ) => {
 
         }) 
         startSetActiveBudget(budget._id)
+        
      
       }
      
@@ -112,6 +113,7 @@ const startSaveBudget = async ( budget ) => {
      console.log(error)
    }
    dispatch( onCloseModal() )
+   
    startGettingBudgets()
  }
 
@@ -222,6 +224,8 @@ const startSaveBudget = async ( budget ) => {
     })
     console.log(data)
     dispatch(clearState())
+    startGettingBudgets()
+
   } catch (error) {
     console.log(error)
   }

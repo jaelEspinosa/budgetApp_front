@@ -329,5 +329,34 @@
     100%{opacity:1;}
 }
 
+.foto{
+    overflow: hidden;
+}
+.foto img{
+    min-height: 80px;
+    min-width: 80px;
+}
 
+.mini{ 
+    overflow: hidden;
+    
+}
 
+.mini img{ 
+    
+    min-height: 65px;
+}
+.lista{
+    max-height: calc(100vh - 260px);
+    overflow-y: scroll;
+}
+
+.lista::-webkit-scrollbar{
+    width: 5px;
+    
+ 
+}
+.lista::-webkit-scrollbar-thumb{
+    background:#67b6bd8a;
+    border-radius: 10px;
+}
