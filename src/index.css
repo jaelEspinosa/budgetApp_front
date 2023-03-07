@@ -360,3 +360,9 @@
     background:#67b6bd8a;
     border-radius: 10px;
 }
+.inputFind{
+    padding:3px;
+    outline:none;
+    border:none;
+
+}

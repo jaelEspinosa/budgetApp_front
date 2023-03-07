@@ -9,6 +9,7 @@ export const BudgetList = () => {
     const { isOpen, startOpenModal } = useFormModalStore()
     const [valorOrderList, setValorOrderList] = useState('date')
     const [orderedBudgets, setOrderedBudgets] = useState(budgets)
+    const [find, setFind] = useState('')
      
     const onSetActiveBudget = _id =>{     
         startSetActiveBudget(_id)        
@@ -29,13 +30,9 @@ export const BudgetList = () => {
       const orderedArray = [...budgets].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
       setOrderedBudgets(orderedArray)
 
+      }
     }
-      
 
-      
-  
-   
-    }
     const descendingOrder = ()=>{
       if (valorOrderList === 'name'){
         const orderedArray = [...budgets].sort((y, x)=> x.name.localeCompare(y.name))
@@ -53,20 +50,39 @@ export const BudgetList = () => {
       
     }
 
-    useEffect(() => {
-      
+    useEffect(() => {      
       setOrderedBudgets(budgets)
-      
-      
-    }, [budgets])
-    
+      }, [budgets]); 
 
+  const onChange = e =>{
+   
+    setFind(e.target.value.toLocaleLowerCase())
+    
+  }
+
+  const onfind = () =>{    
+    setOrderedBudgets(budgets)
+    const filteredArray = [...budgets].filter( budget => budget.name.toLocaleLowerCase().includes(find))
+    setOrderedBudgets(filteredArray)    
+  }
 
   return (
     <div className=' bg-slate-500'>
     <div className='py-5 px-4 text-xl font-semibold'>
-     <div className='mb-5 w-full border-b-2 pb-3'>
-        <span>All Budgets</span>
+     <div className='flex justify-around items-center mb-5 w-full border-b-2 pb-3'>
+        <span>All Budgets{' '}</span>
+        <input 
+             className='rounded-xl ml-5 w-48 text-slate-600 bg-slate-300 inputFind' 
+             type='text'
+             value={find}
+             onChange={onChange} 
+             />
+        <div 
+            className='hover:cursor-pointer'
+            onClick={onfind}
+            >
+           <i className="fa-solid fa-magnifying-glass"></i>
+        </div>     
      </div>
      
     <div className='flex justify-between'>
