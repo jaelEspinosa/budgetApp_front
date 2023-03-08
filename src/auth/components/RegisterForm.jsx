@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from '../../hooks';
 import logo from '../../img/Logotipo.png'
@@ -7,10 +7,10 @@ import { Alert } from './Alert';
 
 export const RegisterForm = () => {
     const [errorFormMessage, setErrorFormMessage] = useState({ok: true, type:'', message: ''})
-
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({name:'', email:'', password:''});
     const {startLogin, startRegister} = useAuthStore();
-
+    const { errorMessage } = useAuthStore()
     const onHandleChange = e =>{
       setErrorFormMessage({ok: true, type:'', message: ''})
       setFormData({
@@ -39,7 +39,11 @@ export const RegisterForm = () => {
          return
       }
 
-      startRegister(formData)
+    startRegister(formData)
+   
+    setTimeout(() => {
+      navigate('/login')
+    }, 2500);
    }
 
   return (
@@ -47,7 +51,7 @@ export const RegisterForm = () => {
          <form onSubmit={onHandleSubmit} noValidate>  
           
             <div className='w-full flex justify-center mb-16 '>
-              <img className='logo' src={logo} alt='logoEureka'/>
+            <h1 className='text-6xl font-bold text-teal-500 title'>Budget<span className='text-slate-500 '>APP</span></h1>
             </div>
             <div>
                <label 
@@ -97,7 +101,7 @@ export const RegisterForm = () => {
                  onChange={onHandleChange}
                  
                />
-                <Alert />   
+               {errorMessage && <Alert />}    
             </div>
 
             <div className='color-turq flex items-end justify-end'>

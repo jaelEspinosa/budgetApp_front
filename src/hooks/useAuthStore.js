@@ -65,7 +65,10 @@ export const useAuthStore = () => {
      try {
       const { data } = await eurekaApi.post('/users', {nombre: name, email, password})
       console.log(data)
-      dispatch(onRegister({msg:'revise su bandeja de entrada para verificar su cuenta'}) )
+      dispatch(onRegister({msg:'revise la bandeja de entrada de su mail, para verificar su cuenta'}) )
+      setTimeout(() => {
+        dispatch (clearErrorMessage()) 
+        }, 2000);
       
      } catch (error) {
       console.log(error)

@@ -40,7 +40,8 @@ export const LoginForm = () => {
     <div className='opacity-75 w-full sm:max-w-md  container mb-12 shadow-lg rounded-xl px-4 py-1 lg:py-8 lg:px-5 bg-white m-auto flex flex-col login-form'>
          <form onSubmit={onHandleSubmit} noValidate>        
             <div className='w-full flex justify-center mb-16 '>
-              <img className='logo' src={logo} alt='logoEureka'/>
+            
+              <h1 className='text-6xl font-bold text-teal-500 title'>Budget<span className='text-slate-500 '>APP</span></h1>
             </div>
             
             <div>
@@ -76,7 +77,7 @@ export const LoginForm = () => {
                />
             </div>
 
-            <div className='color-turq flex items-end justify-between mb-2'>
+            <div className='color-turq flex items-end justify-between mb-2 mt-8'>
                <Link to={'/register'} >Create Account?</Link>
                <Link to={'/remember'} >Forgot password?</Link>               
             </div>
@@ -85,18 +86,7 @@ export const LoginForm = () => {
             <div>
 
             <Alert />
-            <label 
-                  className=" text-gray-600 text-l"
-               >
-               <input 
-                 className={`border p-3 mt-3 mb-1 bg-gray-50 rounded-xl `}
-                 type="checkbox"
-                 placeholder="Password"
-                 name="remember"
-                 
-               />
-               <span className='mx-2'>Remember me</span>
-               </label> 
+            
             </div>
            
             <div className='w-full flex justify-center'>

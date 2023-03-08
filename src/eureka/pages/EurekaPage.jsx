@@ -5,7 +5,7 @@ import { clearActiveBudget } from '../../store/budgets/budgetSlice'
 
 import { BudgetList } from '../components/BudgetList'
 import { DashBoard } from '../components/DashBoard'
-
+import logoBudget from '../../img/presupuesto.png'
 export const EurekaPage = () => {
     const { user, startLogout } = useAuthStore()
     const { startGettingBudgets } = useBudgetStore()
@@ -51,8 +51,9 @@ export const EurekaPage = () => {
 
 
     <div className='grow'>
-        <div className='py-10 px-5 border-b-2 shadow-lg'>
-          <h1>Eurekacloud</h1>
+        <div className='py-10 px-5 border-b-2 shadow-lg flex gap-5'>
+          <h1 className='text-3xl font-bold text-teal-500 title'>Budget<span className='text-slate-500 '>APP</span></h1>
+      
         </div>
         <DashBoard />
           

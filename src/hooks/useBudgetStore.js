@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import eurekaApi from "../api/eurekaApi"
 import { onLogout } from "../store";
-import { addChapter, addTotalCost, addTotalSale, clearState, clearTotals, getBudgets, setActiveBudget } from "../store/budgets/budgetSlice";
+import { addChapter, addTotalCost, addTotalSale, clearActiveBudget, clearState, clearTotals, getBudgets, setActiveBudget } from "../store/budgets/budgetSlice";
 import { onCloseModal } from "../store/ui/formModalSlice";
 
 
@@ -83,6 +83,12 @@ export const useBudgetStore = () => {
   dispatch(clearTotals())
  }
 
+////
+
+////
+const startClearActiveBudget = () =>{
+  dispatch(clearActiveBudget())
+}
 ////
 
 const startSaveBudget = async ( budget ) => {
@@ -306,6 +312,7 @@ const startSaveBudget = async ( budget ) => {
         startDeleteBudget,
         startDeleteChapter,
         startDeleteBatch,
+        startClearActiveBudget,
        
 
   }

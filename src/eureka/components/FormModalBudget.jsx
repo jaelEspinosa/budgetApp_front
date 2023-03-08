@@ -125,7 +125,7 @@ useEffect(() => {
       <span>{formatDate(formData.date)}</span>
       
       </div>
-      <div className='flex items-center justify-start ml-3 gap-11'>
+      <div className='flex items-center justify-start ml-3 gap-11 mb-5'>
           <div 
            onClick={ ()=> fileInputRef.current.click()}
            className='w-10 h-10 border bg-teal-500 text-white flex items-center justify-center rounded-3xl hover:cursor-pointer'>

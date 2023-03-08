@@ -5,7 +5,7 @@ import { useBudgetStore, useFormModalStore } from '../../hooks'
 import imgDefault from '../../img/default-image.jpg'
 
 export const BudgetList = () => {
-    const { budgets, startSetActiveBudget, activeBudget } = useBudgetStore()
+    const { budgets, startSetActiveBudget, activeBudget, startClearActiveBudget } = useBudgetStore()
     const { isOpen, startOpenModal } = useFormModalStore()
     const [valorOrderList, setValorOrderList] = useState('date')
     const [orderedBudgets, setOrderedBudgets] = useState(budgets)
@@ -16,6 +16,7 @@ export const BudgetList = () => {
     }
 
     const handleClickNew = () =>{
+       startClearActiveBudget()
        startOpenModal()
       
     }  
@@ -96,7 +97,7 @@ export const BudgetList = () => {
             <select 
                  value={valorOrderList}
                  onChange={onSelected}
-                 className='bg-gray-600 w-26'
+                 className='bg-gray-600 w-26 rounded-xl'
                  >
               <option value='date'>Date</option>
               <option value='name'>Name</option>
@@ -120,11 +121,11 @@ export const BudgetList = () => {
         }
     </ul>
 
-    {!activeBudget.name && 
+    
       <div  onClick= {handleClickNew}className='float-button-add '>
        <i className="fa-sharp fa-solid fa-plus"></i>
       </div>
-    }
+    
     
     </div>
     

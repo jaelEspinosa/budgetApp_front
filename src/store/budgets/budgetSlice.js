@@ -24,7 +24,7 @@ export const budgetSlice = createSlice({
   setActiveBudget: ( state, { payload } ) => {
     state.activeBudget = payload;
   },
-  clearActiveBudget: ( state, { payload } )=>{
+  clearActiveBudget: ( state )=>{
     state.activeBudget = {}
   },
   clearState: (state) =>{

@@ -51,7 +51,7 @@ export const RememberForm = () => {
          <form onSubmit={onHandleSubmit} noValidate>  
           
             <div className='w-full flex justify-center mb-16 '>
-              <img className='logo' src={logo} alt='logoEureka'/>
+            <h1 className='text-6xl font-bold text-teal-500 title'>Budget<span className='text-slate-500 '>APP</span></h1>
             </div>
             
             

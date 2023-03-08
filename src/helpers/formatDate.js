@@ -10,9 +10,7 @@ const opciones = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric',
+ 
   timeZone: 'Europe/Madrid'
 };
 const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);

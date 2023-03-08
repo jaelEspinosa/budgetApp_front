@@ -148,13 +148,13 @@
     height: 60px;
     position: fixed;
     bottom: 10px;
-    left:10px;
+    left:60px;
     background-color: #5c7ea2;
     color:white;
     padding: 20px;
     border-radius: 50%;
     transition-duration: 0.5s;
-    box-shadow: 2px 2px 12px rgba(41, 39, 39, 0.628);
+    box-shadow: 5px 5px 16px rgba(32, 30, 30, 0.628);
     transform: scale(60%);
 
 }
@@ -365,4 +365,7 @@
     outline:none;
     border:none;
 
+}
+.title{
+    text-shadow: 5px 5px 10px#9db2c6;
 }
