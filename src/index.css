@@ -98,7 +98,7 @@
     width: 60px;
     height: 60px;
     position: fixed;
-    bottom: 10px;
+    bottom: 5px;
     left:10px;
     background-color: rgb(191, 114, 114);
     color:white;
@@ -125,7 +125,7 @@
     width: 60px;
     height: 60px;
     position: fixed;
-    bottom: 10px;
+    bottom: 5px;
     right:10px;
     background-color: #5ca2a1;
     color:white;
@@ -147,7 +147,7 @@
     width: 60px;
     height: 60px;
     position: fixed;
-    bottom: 10px;
+    bottom: 5px;
     left:60px;
     background-color: #5c7ea2;
     color:white;
@@ -347,7 +347,7 @@
     min-height: 65px;
 }
 .lista{
-    max-height: calc(100vh - 260px);
+    max-height: calc(100vh - 385px);
     overflow-y: scroll;
 }
 

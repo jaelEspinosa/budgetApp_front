@@ -3,7 +3,7 @@ import axios from "axios";
 export const fileUpload = async ( file ) => {
     if(!file) return null
 
-   const cloudUrl = 'https://api.cloudinary.com/v1_1/dxbxfhxuv/upload'; // TODO: borrar esta linea
+   const cloudUrl = import.meta.env.VITE_API_CLOUDINARY; // TODO: borrar esta linea
 
    const formData = new FormData();
 
