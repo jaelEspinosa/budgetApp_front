@@ -5,7 +5,7 @@ import { clearActiveBudget } from '../../store/budgets/budgetSlice'
 
 import { BudgetList } from '../components/BudgetList'
 import { DashBoard } from '../components/DashBoard'
-import logoBudget from '../../img/presupuesto.png'
+
 export const EurekaPage = () => {
     const { user, startLogout } = useAuthStore()
     const { startGettingBudgets } = useBudgetStore()
@@ -56,7 +56,7 @@ export const EurekaPage = () => {
       
         </div>
         <DashBoard />
-          
+        
           
     </div>         
     </div>

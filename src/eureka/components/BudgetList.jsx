@@ -71,7 +71,7 @@ export const BudgetList = () => {
     <div className=' bg-slate-500'>
     <div className='py-5 px-4 text-xl font-semibold'>
      <div className='flex justify-around items-center mb-5 w-full border-b-2 pb-3'>
-        <span>All Budgets{' '}</span>
+        <span className='cursor-default '>All Budgets{' '}</span>
         <input 
              className='rounded-xl ml-5 w-48 text-slate-600 bg-slate-300 inputFind' 
              type='text'

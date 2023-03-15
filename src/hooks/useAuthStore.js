@@ -18,10 +18,11 @@ export const useAuthStore = () => {
     try {
                 
         const { data } = await eurekaApi.post('users/login', { email, password } )
-        const{ user, userEmail } = data
+        const{ user, userEmail, _id } = data
+     
         localStorage.setItem('token-eureka', data.token)
         
-        dispatch( onLogin({user, userEmail}))
+        dispatch( onLogin({user, userEmail, _id}))
 
     } catch (error) {
         console.log (error)
@@ -49,8 +50,8 @@ export const useAuthStore = () => {
           'Authorization': 'Bearer ' + token
         }
       });
-     
-      dispatch( onLogin({user: data.perfil.nombre, userEmail: data.perfil.email}))
+      console.log(data)
+      dispatch( onLogin({user: data.perfil.nombre, userEmail: data.perfil.email, _id: data.perfil._id}))
     } catch (error) {
       console.log(error)
     }

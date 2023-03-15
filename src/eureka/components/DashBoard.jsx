@@ -1,20 +1,33 @@
 
 import { useEffect, useState } from "react";
-import { useBudgetStore, useFormModalStore} from "../../hooks";
+import { useAuthStore, useBudgetStore, useFormModalStore} from "../../hooks";
 
 import { Batch } from "./Batch";
 import { DeleteBudgetModal } from "./DeleteBudgetModal";
 import { FormModalBudget } from "./FormModalBudget";
 
 export const DashBoard = () => {
-    
-    const {activeBudget, totalCost, totalSale, startSetTotals} = useBudgetStore()
-    const {isLoading, startOpenModal, startCloseModal } = useFormModalStore()
+ 
+    const {activeBudget, totalCost, totalSale, startSetTotals, budgetAlert} = useBudgetStore()
+    const {user} = useAuthStore()
+    const { startOpenModal } = useFormModalStore()
     const { isOpen } = useFormModalStore()
     const [showModalDelete, setShowModalDelete] = useState(false)
+    const [alert, setAlert] = useState(undefined)
+
  const handleClickEdit = ()=>{
+
+  if(user._id !== activeBudget.user){
+     setAlert('you don`t have permissions to modify this budget')
+     setTimeout(() => {
+      setAlert(undefined)
+     }, 2000);
+     return
+  }
     startOpenModal()
  }   
+
+
 
   useEffect(() => {
 
@@ -27,14 +40,14 @@ export const DashBoard = () => {
     
     
   return (
-    <div className="my-10 mx-10 text-2xl text-teal-500 budget">
+    <div className="my-10 mx-10 text-2xl text-teal-500 budget cursor-default">
    {
     isOpen && <FormModalBudget />
    } 
       <h1>Budget</h1>
       {activeBudget.name &&
         <>
-
+        {alert && <div className='shadow text-center text-orange-400 bg-teal-100'>*{alert}*</div> } 
         <div className="mt-10 border p-2 flex items-center justify-between">
         <div>
             <h2 className="text-xl text-slate-700">{activeBudget.name}</h2>
@@ -44,6 +57,7 @@ export const DashBoard = () => {
           <img src={activeBudget.img}/>
         </div>
         </div>
+        {budgetAlert && <div className='shadow text-center text-orange-400 bg-teal-100'>*{budgetAlert}*</div> } 
       <div>
       <div>
        <h1 className='my-10 px-5 text-xl font-bold text-slate-600'>Details</h1>

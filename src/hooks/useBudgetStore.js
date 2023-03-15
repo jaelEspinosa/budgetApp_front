@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import eurekaApi from "../api/eurekaApi"
 import { onLogout } from "../store";
-import { addChapter, addTotalCost, addTotalSale, clearActiveBudget, clearState, clearTotals, getBudgets, setActiveBudget } from "../store/budgets/budgetSlice";
+import { addTotalCost, addTotalSale, clearActiveBudget, clearState, clearTotals, getBudgets, setActiveBudget, setAlertBudget } from "../store/budgets/budgetSlice";
 import { onCloseModal } from "../store/ui/formModalSlice";
+import { useFormModalStore } from "./useFormModalStore";
 
 
 
@@ -11,7 +12,9 @@ export const useBudgetStore = () => {
   
   const dispatch = useDispatch();
   const {loading, budgets, budgetAlert, activeBudget, totalCost, totalSale} = useSelector(state => state.budget)
-  const {} = useSelector(state => state.formModal)
+  const { user } = useSelector(state => state.auth)
+  const {startCloseModal}= useFormModalStore()
+  
   
   ////
 
@@ -104,6 +107,7 @@ const startSaveBudget = async ( budget ) => {
           }
         })
       }else{
+                
         const { data } = await eurekaApi.put(`/budgets/${budget._id}`, budget,{
           headers:{
             'Authorization': 'Bearer ' + token
@@ -191,9 +195,6 @@ const startSaveBudget = async ( budget ) => {
     
     }
 
-     
-    
-    
     startSetActiveBudget(activeBudget._id)
     
   } catch (error) {
@@ -204,6 +205,15 @@ const startSaveBudget = async ( budget ) => {
 
  const startDeleteBudget = async () =>{
   const token = localStorage.getItem('token-eureka')
+
+  if ( user._id !== activeBudget.user ){
+    
+    dispatch(setAlertBudget('You don`t have permissions to delete this budget'))
+    setTimeout(() => {
+      dispatch(setAlertBudget(undefined))
+    }, 2000);
+    return
+  }
 
   try {
     for (const chapter of activeBudget.chapters) {      
