@@ -13,7 +13,7 @@ export const FormModalBudget = () => {
   const { activeBudget, startSaveBudget, startSetActiveLocalBudget } = useBudgetStore()
   const { startCloseModal } = useFormModalStore()
 
-  const [formData, setFormData] = useState(activeBudget || {});
+  const [formData, setFormData] = useState({name:'', clientName:''});
   
   const [showModalChapter, setShowModalChapter] = useState(false)
   const [showModalBatch, setShowModalBatch] = useState(false)
@@ -24,13 +24,16 @@ export const FormModalBudget = () => {
 
 
 useEffect(() => {
-  setFormData(activeBudget)
-
+  
+  if(activeBudget.name){
+    setFormData(activeBudget)
+  }
+  
   
 }, [activeBudget.chapters])
 
  const onFileInputChange = async ({target}) =>{
-  console.log('los files son...', target.files[0])
+  
  const fileImage = await fileUpload( target.files[0])
  setFormData({
   ...formData,
@@ -40,10 +43,11 @@ useEffect(() => {
 
   const onInputChange = e =>{
     setFormError({ok:true, type:'', msg:''} )
-        setFormData({
+       setFormData({
           ...formData,
           [e.target.name]:e.target.value
         })
+      
       startSetActiveLocalBudget( formData )
       }
   
@@ -88,7 +92,7 @@ useEffect(() => {
  
     <h1 className='p-10 m-2 text-4xl'>
        {`${activeBudget._id ? 'Edit Budget:  ':'New Budget: '}`}
-       <span className='font-bold'>{activeBudget?.name}</span>  
+       <span className='font-bold'>{formData?.name}</span>  
     </h1>
 
     

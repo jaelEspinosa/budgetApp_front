@@ -24,20 +24,24 @@ export const RegisterForm = () => {
 
        // form validation
        if(formData.name.length < 4 ){
-        setErrorFormMessage({ok:false, type:'name', message:'campo requerido'})
+        setErrorFormMessage({ok:false, type:'name', message:'Required'})
         return
        }
 
 
        const  validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
        if(!validEmail.test(formData.email)){
-         setErrorFormMessage({ok:false, type:'email', message:'Email no válido'})
+         setErrorFormMessage({ok:false, type:'email', message:'Email not valid'})
          return
       }
-      if(formData.password.length === 0){
-         setErrorFormMessage({ok:false, type:'password', message:'Email no válido'})
+      //const validPassword = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/           
+      const validPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/             
+
+      if(!validPassword.test(formData.password)){
+         setErrorFormMessage({ok:false, type:'password', message:'The password must contain at least one uppercase letter, at least one lowercase letter, at least one number, and be between 8 and 16 characters long.'})
          return
       }
+
 
     startRegister(formData)
    
@@ -119,6 +123,13 @@ export const RegisterForm = () => {
                 :' bg-orange-400  hover:bg-orange-600 hover:cursor-pointer transition-colors lg:w-auto'}`}
             />
             </div>
+            {
+                     errorFormMessage.message && 
+                  <div className='shadow w-full text-center text-orange-300 mt-1'>
+                  <span>{errorFormMessage.message}</span>
+                  </div>
+            }
+
            </form>
     </div>
   )

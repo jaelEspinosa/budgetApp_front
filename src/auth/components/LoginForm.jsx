@@ -53,7 +53,7 @@ export const LoginForm = () => {
                <input 
                  className={`border w-full p-3 mt-3 mb-5 bg-gray-50 rounded-xl ${errorFormMessage.type === 'email' ? 'no-valido': ''}`}
                  type="email"
-                 placeholder="Email de Usuario"
+                 placeholder="User Email"
                  name="email"
                  value={formData.email}
                  onChange={onHandleChange}

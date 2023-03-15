@@ -28,10 +28,12 @@ export const RememberConfirmForm = () => {
 
        // form validation
      
-      if(formData.password.length === 0){
-         setErrorFormMessage({ok:false, type:'password', message:'Email no válido'})
-         return
-      }
+       const validPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/             
+
+       if(!validPassword.test(formData.password)){
+          setErrorFormMessage({ok:false, type:'password', message:'The password must contain at least one uppercase letter, at least one lowercase letter, at least one number, and be between 8 and 16 characters long.'})
+          return
+       }
 
       if(formData.password2 !== formData.password){
         setErrorFormMessage({ok:false, type:'password', message:'Password do not match'})
