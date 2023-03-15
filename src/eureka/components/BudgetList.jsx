@@ -97,7 +97,7 @@ export const BudgetList = () => {
             <select 
                  value={valorOrderList}
                  onChange={onSelected}
-                 className='bg-gray-600 w-26 rounded-xl'
+                 className='bg-gray-600 w-26 rounded-xl px-2 text-s'
                  >
               <option value='date'>Date</option>
               <option value='name'>Name</option>
